@@ -1,11 +1,21 @@
 import Layout from "../components/Layout";
+import axios from "axios";
 
-const SSRTest = ({ from }) => {
-  return <Layout>{from}에서 실행되었습니다.</Layout>;
+const SSRTest = ({ users }) => {
+  const userList = users.map((user) => <li key={user.id}>{user.username}</li>);
+  return (
+    <Layout>
+      <ul>{userList}</ul>
+    </Layout>
+  );
 };
 
-SSRTest.getInitialProps = ({ req }) => {
-  return req ? { from: "server" } : { from: "client" };
+SSRTest.getInitialProps = async ({ req }) => {
+  const response = await axios.get(
+    `https://jsonplaceholder.typicode.com/users`
+  );
+
+  return { users: response.data };
 };
 
 export default SSRTest;

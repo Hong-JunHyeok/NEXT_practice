@@ -126,3 +126,50 @@ export default SSRTest;
 
 ![gif](https://velopert.com/wp-content/uploads/2017/04/4%E1%84%8B%E1%85%AF%E1%86%AF-08-2017-03-10-34.gif)
 
+## axios를 통한 데이터 fetch
+
+```js
+import Layout from "../components/Layout";
+import axios from "axios";
+
+const SSRTest = ({ users }) => {
+  const userList = users.map((user) => <li key={user.id}>{user.username}</li>);
+  return (
+    <Layout>
+      <ul>{userList}</ul>
+    </Layout>
+  );
+};
+
+SSRTest.getInitialProps = async ({ req }) => {
+  const response = await axios.get(
+    `https://jsonplaceholder.typicode.com/users`
+  );
+
+  return { users: response.data };
+};
+
+export default SSRTest;
+```
+
+다음과 같이 getInitialProps에는 비동기처리를 할 수 있다.
+
+그래서 다음과 같이 작업하면
+
+![image](https://velopert.com/wp-content/uploads/2017/04/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA-2017-04-08-%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB-3.25.31.png)
+
+잘 매핑이 된 모습을 볼 수 있다.
+
+## prefetch 기능 사용해보기
+
+prefetch는 데이터를 먼저 불러온 다음, 라우팅을 시작하는 방식이다.
+
+방식은 어렵지 않다.
+
+```js
+<Link prefetch href="/ssr-test">
+  <a style={linkStyle}>SSR 테스트</a>
+</Link>
+```
+
+prefetch를 Link의 속성에 명시해주기만 하면 된다.
