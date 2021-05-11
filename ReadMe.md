@@ -97,3 +97,4 @@ export default Search;
 (http://localhost:3000/search?keyword=%22%EC%B7%A8%EC%97%85%22)
 
 
+# NEXT에서 외부 데이터 가져오기
