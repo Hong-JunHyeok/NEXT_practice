@@ -239,3 +239,38 @@ export default class MyDocument extends Document {
 
 이렇게 될 경우엔 이 값을 기본적으로 설정하고 Head 컴포넌트가 사용된 페이지의 경우엔 이 기본값 위에 덮어씌운다.
 
+# 설정 커스터마이징 하기
+
+아까 NEXT의 장점을 설명할때도 잠깐 언급했는데 webpack 및 babel 설정을 커스터마이징 할 수 있다.
+
+webpack의 경우엔 최상위 디렉토리에 다음과 같이 next.config.js 파일을 만들어서 설정하면 된다.
+
+```js
+module.exports = {
+  webpack: (config, { dev }) => {
+    return config;
+  },
+};
+```
+
+매뉴얼에 따르면 불러올수있는 파일형식을 추가하기 위해서 loader를 추가하는건 좋지 않다고한다. 클라이언트쪽 코드만 웹팩으로 번들되기 때문에 서버사이드렌더링에서 잘 작동하지 않기 때문이다.
+
+**그 대신 바벨 플러그인을 사용하라고 권고한다.**
+
+똑같은 방법으로 .babelrc을 만들어서 설정할 수 있다.
+
+```js
+{
+  "presets": [
+    "next/babel",
+    "stage-0"
+  ]
+}
+```
+
+# NEXT에서 스타일링을 하는 방법
+
+NEXT에서는 CSS in JS방식을 가장 선호한다. (SSR이기 때문에)
+
+기본적으로 내장되어있는 `styled-jsx`를 사용해보도록 해보자.
+

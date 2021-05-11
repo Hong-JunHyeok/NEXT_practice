@@ -2,7 +2,14 @@ import Layout from "../components/Layout";
 
 const About = () => (
   <Layout>
-    <h2>안녕하세요 저는 Velopert 입니다.</h2>
+    <style jsx>
+      {`
+        h2 {
+          color: green;
+        }
+      `}
+    </style>
+    <h2>안녕하세요 저는 홍준혁입니다.</h2>
   </Layout>
 );
 
