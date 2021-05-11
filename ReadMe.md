@@ -70,3 +70,30 @@ const Index = () => (
 export default Index;
 ```
 
+# NEXT에서 유동적인 주소 사용하기
+
+## 쿼리 파라미터
+
+쿼리 파라미터의 형태는 `/search?keyword=something`이다.
+
+![image](https://user-images.githubusercontent.com/48292190/117805523-07298e80-b294-11eb-9a40-1e4da18d8abc.png)
+
+props로 url을 가져와서 `url.query.keyword`에 접근하면 된다.
+
+다음과 같이 page를 작성해주자.
+
+```js
+import Layout from "../components/Layout";
+
+const Search = ({ url }) => {
+  return <Layout>당신이 검색한 키워드는 "{url.query.keyword}" 입니다.</Layout>;
+};
+
+export default Search;
+```
+
+이제 쿼리 파라미터에 원하는 값을 넣어보도록 하자. 
+
+(http://localhost:3000/search?keyword=%22%EC%B7%A8%EC%97%85%22)
+
+
