@@ -20,3 +20,52 @@
 </Link>
 ```
 
+# NEXT에서 공용 컴포넌트 사용해보기
+
+공용 컴포넌트란 페이지상에서 공동으로 사용하는(많이 사용되는) 컴포넌트를 의미한다.
+
+대표적인 예로 헤더와 푸터가 있다.
+
+`components`폴더 안에 컴포넌트를 정의해보자.
+
+```js
+import Link from "next/link";
+
+const linkStyle = {
+  marginRight: "1rem",
+};
+
+const Header = () => (
+  <div>
+    <Link href="/">
+      <a style={linkStyle}>홈</a>
+    </Link>
+    <Link href="/about">
+      <a style={linkStyle}>소개</a>
+    </Link>
+  </div>
+);
+
+export default Header;
+```
+
+이제 page에서 만든 컴포넌트를 사용하면 된다.
+
+```js
+import Link from "next/link";
+import Header from "../components/Header";
+
+const Index = () => (
+  <div>
+    <Header />
+    <h1>안녕, Next.js</h1>
+    <h2>
+      <Link href="/about">
+        <a style={{ background: "black", color: "white" }}>소개</a>
+      </Link>
+    </h2>
+  </div>
+);
+
+export default Index;
+```
