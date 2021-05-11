@@ -1,11 +1,14 @@
 import Layout from "../components/Layout";
 import axios from "axios";
+import styled from "styled-components";
 
 const SSRTest = ({ users }) => {
-  const userList = users.map((user) => <li key={user.id}>{user.username}</li>);
+  const userList = users.map((user) => (
+    <UserItem key={user.id}>{user.username}</UserItem>
+  ));
   return (
     <Layout>
-      <ul>{userList}</ul>
+      <UserList>{userList}</UserList>
     </Layout>
   );
 };
@@ -17,5 +20,14 @@ SSRTest.getInitialProps = async ({ req }) => {
 
   return { users: response.data };
 };
+
+const UserList = styled.ul`
+  list-style: none;
+`;
+
+const UserItem = styled.li`
+  border: 1px solid lightgray;
+  padding: 20px;
+`;
 
 export default SSRTest;

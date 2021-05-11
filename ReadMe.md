@@ -274,3 +274,43 @@ NEXT에서는 CSS in JS방식을 가장 선호한다. (SSR이기 때문에)
 
 기본적으로 내장되어있는 `styled-jsx`를 사용해보도록 해보자.
 
+```js
+import Layout from "../components/Layout";
+
+const About = () => (
+  <Layout>
+    <style jsx>
+      {`
+        h2 {
+          color: green;
+        }
+      `}
+    </style>
+    <h2>안녕하세요 저는 홍준혁입니다.</h2>
+  </Layout>
+);
+
+export default About;
+```
+잘 적용된다.
+
+_document.js 파일에서 flush()를 했었는데 `styled-jsx`는 기본적으로 클라이언트 사이드에서 스타일링을 하는데, flush()를 수행하게 되면 서버사이드에서 이 작업을 수행한다. 
+
+서버사이드에서 스타일링 작업을 하게되면 클라이언트쪽에서 적은 자원을 사용하니까 더 빠른 페이지로딩을 할 수 있다.
+
+# NEXT 프로젝트 배포하기 
+```
+yarn global add now
+```
+
+now라는 서비스를 전역적으로 설치를 한 다음,
+
+```
+"build": "next build",
+```
+이 코드를 script에 넣어주도록 하자.
+
+이제 터미널에 `now`라고 입력하면 링크가 생성된다. (처음일때 이메일 인증이 필요하다.)
+
+이제 [링크](https://next-practice-hong-junhyeok.vercel.app/)에 접속하면 정상적으로 빌드가 잘 된 모습을 볼 수 있다.
+
