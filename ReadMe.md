@@ -199,8 +199,43 @@ const Index = () => (
 
 export default Index;
 ```
-Head라는걸 import한 다음에 다음과 같이 작성을 하면, 
+
+Head라는걸 import한 다음에 다음과 같이 작성을 하면,
 
 ![image](https://user-images.githubusercontent.com/48292190/117808468-e19e8400-b297-11eb-9976-fa645b3fedd8.png)
 
 페이지의 title이 잘 바뀌는 모습을 볼 수 있다.
+
+여러 페이지에서 공통적으로 사용하는 헤더를 설정할 경우, `_document.js`를 pages에 만들어주고 다음과 같은 코드를 작성해주자.
+
+```js
+import Document, { Head, Main, NextScript, Html } from "next/document";
+import flush from "styled-jsx/server";
+
+export default class MyDocument extends Document {
+  static getInitialProps({ renderPage }) {
+    const { html, head } = renderPage();
+    const styles = flush();
+
+    return { html, head, styles };
+  }
+
+  render() {
+    return (
+      <html>
+        <Head>
+          <style>{`body { margin: 0 } /* custom! */`}</style>
+          <title>Next.js 연습</title>
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </html>
+    );
+  }
+}
+```
+
+이렇게 될 경우엔 이 값을 기본적으로 설정하고 Head 컴포넌트가 사용된 페이지의 경우엔 이 기본값 위에 덮어씌운다.
+
