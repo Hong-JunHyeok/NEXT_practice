@@ -92,9 +92,37 @@ const Search = ({ url }) => {
 export default Search;
 ```
 
-이제 쿼리 파라미터에 원하는 값을 넣어보도록 하자. 
+이제 쿼리 파라미터에 원하는 값을 넣어보도록 하자.
 
 (http://localhost:3000/search?keyword=%22%EC%B7%A8%EC%97%85%22)
 
-
 # NEXT에서 외부 데이터 가져오기
+
+우선 `getInitialProps`라는 것을 이해해야 한다.
+
+이 메소드는 서버 사이드에서 실행될 수도 있고, 클라이언트 사이드에서도 실행 될 수 있다.
+
+코드를 보며 이해해보도록 하자.
+
+```js
+import Layout from "../components/Layout";
+
+const SSRTest = ({ from }) => {
+  return <Layout>{from}에서 실행되었습니다.</Layout>;
+};
+
+SSRTest.getInitialProps = ({ req }) => {
+  return req ? { from: "server" } : { from: "client" };
+};
+
+export default SSRTest;
+```
+
+여기서 `getInitialProps`에서 실행한 메서드에서 리턴하는 값이 해당 컴포넌트의 props로 전달되게 된다.
+
+`req`에 집중해서 볼 필요가 있는데, req에는 서버측에서 렌더링 될 때 파라미터로 전달되게 된다. 때문에 client측에서는 req에 undefined가 뜨게 되는것이다.
+
+그 원리로 다음과 같은 삼항 연산자를 쓴 것이다.
+
+![gif](https://velopert.com/wp-content/uploads/2017/04/4%E1%84%8B%E1%85%AF%E1%86%AF-08-2017-03-10-34.gif)
+
