@@ -1,0 +1,16 @@
+{
+  "name": "NEXT_practice",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Hong-JunHyeok/NEXT_practice.git",
+  "author": "HongJunHyeok <edb1631@naver.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next"
+  },
+  "dependencies": {
+    "next": "^10.2.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
