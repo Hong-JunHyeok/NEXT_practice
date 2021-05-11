@@ -173,3 +173,34 @@ prefetch는 데이터를 먼저 불러온 다음, 라우팅을 시작하는 방�
 ```
 
 prefetch를 Link의 속성에 명시해주기만 하면 된다.
+
+# Head 설정하기
+
+`react-helmet`이라는 것을 사용해본 경험이 있는가? Next에서는 비슷한 기능이 기본으로 내장되어 있다.
+
+```js
+import Link from "next/link";
+import Layout from "../components/Layout";
+import Head from "next/head";
+
+const Index = () => (
+  <Layout>
+    <Head>
+      <title>Index 페이지</title>
+    </Head>
+    <h1>안녕, Next.js</h1>
+    <h2>
+      <Link href="/about">
+        <a style={{ background: "black", color: "white" }}>소개</a>
+      </Link>
+    </h2>
+  </Layout>
+);
+
+export default Index;
+```
+Head라는걸 import한 다음에 다음과 같이 작성을 하면, 
+
+![image](https://user-images.githubusercontent.com/48292190/117808468-e19e8400-b297-11eb-9976-fa645b3fedd8.png)
+
+페이지의 title이 잘 바뀌는 모습을 볼 수 있다.
